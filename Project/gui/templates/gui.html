@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Control Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Robot Control Panel</h1>
+
+    <div class="container">
+        <h2>Joint Control</h2>
+        <label for="joint1">Joint 1 Angle:</label>
+        <input type="range" id="joint1" min="0" max="180" value="90" oninput="updateJointValue(this.value)">
+        <span id="joint1Value">90°</span>
+        <button onclick="sendCommand('move_joint', { joint: 1, angle: parseInt($('#joint1').val()) })">Set Joint Angle</button>
+    </div>
+
+    <div class="container">
+        <h2>End Effector Control</h2>
+        <label>X:</label> <input type="number" id="x" value="0">
+        <label>Y:</label> <input type="number" id="y" value="0">
+        <label>Z:</label> <input type="number" id="z" value="0">
+        <button onclick="sendCommand('move_effector', { x: $('#x').val(), y: $('#y').val(), z: $('#z').val() })">Move Effector</button>
+    </div>
+
+    <div class="container">
+        <h2>Object Interaction</h2>
+        <button onclick="sendCommand('pick_object', {})">Pick Object</button>
+        <button onclick="sendCommand('stack_objects', {})">Stack Objects</button>
+    </div>
+
+    <div id="status" class="container">Waiting for command...</div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
