@@ -8,16 +8,16 @@ function sendCommand(action, data) {
     $("#status").html("<b>Processing...</b>").fadeIn(300);
 
     $.ajax({
-        url: "/voice-command",
+        url: "http://127.0.0.1:5001/send-command",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify({ action: action, data: data }),
         success: function(response) {
-            $("#status").html("<b>Success:</b> " + response.message).fadeOut(100).fadeIn(500);
+            $("#status").html("<b>Success</b>").fadeOut(100).fadeIn(500); // Just "Success"
         },
         error: function(xhr) {
-            $("#status").html("<b>Error:</b> " + xhr.responseJSON.message).css("color", "red");
+            let errorMessage = xhr.responseJSON ? xhr.responseJSON.message : "An error occurred";
+            $("#status").html("<b>Error:</b> " + errorMessage).css("color", "red");
         }
     });
 }
-
