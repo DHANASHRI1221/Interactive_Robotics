@@ -1,7 +1,8 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robot Control Panel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,6 +33,74 @@
     </div>
 
     <div id="status" class="container">Waiting for command...</div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Control Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Robot Control Panel</h1>
+
+        <!-- Movement Control -->
+        <div class="section">
+            <h2>Movement Control</h2>
+            <div class="grid">
+                <button onclick="sendCommand('move_up', {})">⬆ Move Up</button>
+                <button onclick="sendCommand('move_down', {})">⬇ Move Down</button>
+                <button onclick="sendCommand('move_left', {})">⬅ Move Left</button>
+                <button onclick="sendCommand('move_right', {})">➡ Move Right</button>
+                <button onclick="sendCommand('move_forward', {})">🔼 Move Forward</button>
+                <button onclick="sendCommand('move_backward', {})">🔽 Move Backward</button>
+            </div>
+        </div>
+
+        <!-- Joint Control -->
+        <div class="section">
+            <h2>Joint Control</h2>
+            <label for="joint1">Joint 1 Angle:</label>
+            <input type="range" id="joint1" min="0" max="180" value="90" oninput="updateJointValue(this.value)">
+            <span id="joint1Value">90°</span>
+            <button onclick="sendCommand('move_joint', { joint: 'UR5/joint1', angle: parseInt($('#UR5/joint1').val()) })">
+                Set Joint Angle
+            </button>
+        </div>
+
+        <!-- End Effector Control -->
+        <div class="section">
+            <h2>End Effector Control</h2>
+            <input type="number" id="x" placeholder="X Coordinate" step="0.1">
+            <input type="number" id="y" placeholder="Y Coordinate" step="0.1">
+            <input type="number" id="z" placeholder="Z Coordinate" step="0.1">
+            <button onclick="sendCommand('set_target_position', { 
+                x: parseFloat($('#x').val()), 
+                y: parseFloat($('#y').val()), 
+                z: parseFloat($('#z').val()) 
+            })">
+                Move Effector
+            </button>
+        </div>
+
+        <!-- Simulation Control -->
+        <div class="section">
+            <h2>Simulation Control</h2>
+            <button class="start-btn" onclick="sendCommand('start_simulation', {})">▶ Start Simulation</button>
+            <button class="stop-btn" onclick="sendCommand('stop_simulation', {})">⏹ Stop Simulation</button>
+            <button class="reset-btn" onclick="sendCommand('reset_position', {})">Reset Position</button>
+        </div>
+
+        <!-- Status Display -->
+        <div id="status">Waiting for command...</div>
+    </div>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
