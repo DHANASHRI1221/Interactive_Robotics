@@ -8,21 +8,22 @@ body {
     padding: 0;
 }
 
-/* Header */
-h1 {
-    margin-top: 20px;
-    font-size: 28px;
-    text-transform: uppercase;
+/* Container */
+.container {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Control Panel */
-.container {
-    max-width: 600px;
-    margin: 30px auto;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
+/* Section Styling */
+.section {
+    margin: 20px 0;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Buttons */
@@ -30,8 +31,8 @@ button {
     background: #3498db;
     border: none;
     color: white;
-    padding: 12px 20px;
-    margin: 10px;
+    padding: 12px 18px;
+    margin: 5px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
@@ -42,12 +43,44 @@ button:hover {
     background: #2980b9;
 }
 
-/* Sliders & Inputs */
+/* Simulation Buttons */
+.start-btn {
+    background: #2ecc71;
+}
+
+.start-btn:hover {
+    background: #27ae60;
+}
+
+.stop-btn {
+    background: #e74c3c;
+}
+
+.reset-btn {
+    background: #120897;
+}
+.reset-btn:hover {
+    background: #0a065d;
+}
+
+.stop-btn:hover {
+    background: #c0392b;
+}
+
+/* Grid Layout for Movement Controls */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Input Fields */
 input {
-    margin: 10px 0;
     padding: 8px;
-    border: none;
+    margin: 5px;
     border-radius: 5px;
+    border: none;
 }
 
 /* Status Box */
@@ -57,4 +90,5 @@ input {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
     display: inline-block;
+    font-weight: bold;
 }
